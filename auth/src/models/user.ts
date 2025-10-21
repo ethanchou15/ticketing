@@ -1,4 +1,5 @@
 import { Schema, Model, Document, model } from "mongoose";
+import { Password } from "../services/password";
 
 // describe the properties of a user
 interface UserAttrs {
@@ -26,6 +27,20 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+});
+
+// middleware to hash the password before saving the user
+userSchema.pre("save", async function (done) {
+  // only hash the password if it has been modified, or is new
+  if (this.isModified("password")) {
+    // hash the password, this.get("password") gets the current password value
+    const hashed = await Password.toHash(this.get("password"));
+    // set the password to the hashed value, this.set("password", value) sets the password field
+    this.set("password", hashed);
+  }
+
+  // call done to indicate that the middleware is finished
+  done();
 });
 
 // add type-safe build method for creating a user, to ensure all required properties are provided
