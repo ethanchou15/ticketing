@@ -14,7 +14,7 @@ app.use(signoutRouter);
 app.use(signupRouter);
 
 // Handle all other routes /api/users/* that are not defined
-app.all("/{*any}", () => {
+app.all("/{*any}", async () => {
   throw new NotFoundError();
 });
 
