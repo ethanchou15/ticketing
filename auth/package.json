@@ -4,7 +4,6 @@
   "description": "",
   "license": "ISC",
   "author": "Ethan Chou",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts"

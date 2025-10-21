@@ -7,7 +7,8 @@ build:
   local:
     push: true
   artifacts:
-    - image: ticketingacr.azurecr.io/auth
+    - image: yiqu1/auth
+    # - image: ticketingacr.azurecr.io/auth
       context: auth
       docker:
         dockerfile: Dockerfile
