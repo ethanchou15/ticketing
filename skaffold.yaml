@@ -5,9 +5,9 @@ manifests:
     - ./infra/k8s/*
 build:
   local:
-    push: false
+    push: true
   artifacts:
-    - image: yiqu1/auth
+    - image: ticketingacr.azurecr.io/auth
       context: auth
       docker:
         dockerfile: Dockerfile

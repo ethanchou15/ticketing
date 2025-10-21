@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: yiqu1/auth
+          image: ticketingacr.azurecr.io/auth
 ---
 apiVersion: v1
 kind: Service
