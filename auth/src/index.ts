@@ -13,7 +13,7 @@ app.use(express.json());
 
 // trust traffic from ingress-nginx proxy, so that secure cookies work
 app.set("trust proxy", true);
-// configure cookie session middleware, so that we can use req.session
+// configure cookie session middleware, so that we can use req.session(default name is session)
 app.use(cookieSession({
   signed: false,
   secure: true,
