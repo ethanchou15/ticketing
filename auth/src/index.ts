@@ -14,10 +14,12 @@ app.use(express.json());
 // trust traffic from ingress-nginx proxy, so that secure cookies work
 app.set("trust proxy", true);
 // configure cookie session middleware, so that we can use req.session(default name is session)
-app.use(cookieSession({
-  signed: false,
-  secure: true,
-}));
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  })
+);
 
 app.use(currentUserRouter);
 app.use(signinRouter);
@@ -32,6 +34,11 @@ app.all("/{*any}", async () => {
 app.use(errorHandler);
 
 const start = async () => {
+  // check if JWT_KEY is defined
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY must be defined");
+  }
+
   // Connect to MongoDB, service name is auth-mongo-srv, port 27017, database name is auth
   try {
     await connect("mongodb://auth-mongo-srv:27017/auth");
