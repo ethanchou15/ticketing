@@ -6,9 +6,18 @@ import signinRouter from "./routes/signin.ts";
 import signoutRouter from "./routes/signout.ts";
 import signupRouter from "./routes/signup.ts";
 import { connect } from "mongoose";
+import cookieSession from "cookie-session";
 const app: Express = express();
 
 app.use(express.json());
+
+// trust traffic from ingress-nginx proxy, so that secure cookies work
+app.set("trust proxy", true);
+// configure cookie session middleware, so that we can use req.session
+app.use(cookieSession({
+  signed: false,
+  secure: true,
+}));
 
 app.use(currentUserRouter);
 app.use(signinRouter);
