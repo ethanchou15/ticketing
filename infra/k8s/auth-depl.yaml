@@ -16,6 +16,13 @@ spec:
         - name: auth
           image: yiqu1/auth
           # image: ticketingacr.azurecr.io/auth
+          # environment variables, k create secret generic jwt-secret --from-literal=JWT_KEY=asdf
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
