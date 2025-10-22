@@ -16,18 +16,35 @@ interface UserModel extends Model<UserDoc> {
 interface UserDoc extends Document {
   email: string;
   password: string;
+  id?: string; // will exist after toJSON transform
 }
 
-const userSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  // to customize the JSON output when calling res.send(user)
+  {
+    toJSON: {
+      // doc is the mongoose document, ret is the plain object representation
+      transform(doc, ret: any) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.password;
+        delete ret.__v;
+
+        return ret;
+      },
+    },
+  }
+);
 
 // middleware to hash the password before saving the user
 userSchema.pre("save", async function (done) {
