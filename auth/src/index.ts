@@ -1,5 +1,5 @@
 import { connect } from "mongoose";
-import { app } from "./app.ts";
+import { app } from "./app";
 
 const start = async () => {
   // check if JWT_KEY is defined

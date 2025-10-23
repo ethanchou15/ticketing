@@ -1,10 +1,10 @@
 import express, { Express } from "express";
-import { NotFoundError } from "./errors/not-found-error.ts";
-import { errorHandler } from "./middlewares/error-handler.ts";
-import currentUserRouter from "./routes/current-user.ts";
-import signinRouter from "./routes/signin.ts";
-import signoutRouter from "./routes/signout.ts";
-import signupRouter from "./routes/signup.ts";
+import { NotFoundError } from "./errors/not-found-error";
+import { errorHandler } from "./middlewares/error-handler";
+import currentUserRouter from "./routes/current-user";
+import signinRouter from "./routes/signin";
+import signoutRouter from "./routes/signout";
+import signupRouter from "./routes/signup";
 import cookieSession from "cookie-session";
 export const app: Express = express();
 
